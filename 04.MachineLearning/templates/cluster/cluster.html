@@ -1,32 +1,26 @@
 {% extends "base.html" %}
 {% block weather %} {{ weather|safe() }} {% endblock %}
 {% block subtitle %}
-    <strong>커피 지수</strong>
+    <strong>군집화</strong><small> - PCA and K-Means Clustering</small>
 {% endblock %}
 {% block content %}
     <div class="row">
         <div class="col-2"></div>
         <div class="col-8">
-            <form action="/cartogram/coffee" method="POST" enctype="multipart/form-data">
+            <form action="/cluster/cluster" method="POST" enctype="multipart/form-data">
                 <table class="table table-borderless">
                     <tr>
-                        <td><label for="item">항목</label></td>
-                        <td>
-                            <select class="custom-select" id="item" name="item">
-                                {% for item in ['커피지수','이디야 매장수','스타벅스 매장수','커피빈 매장수','빽다방 매장수'] %}
-                                    <option value="{{item}}">{{item}}</option>
-                                {% endfor %}
-                            </select>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td>CSV 파일</td>
+                        <td><label for="csv">데이터셋</label></td>
                         <td>
                             <div class="custom-file mb-3">
                                 <input type="file" class="custom-file-input" id="csv" name="csv">
-                                <label class="custom-file-label" for="csv">업로드할 파일 선택</label>
+                                <label class="custom-file-label" for="csv">군집화할 CSV 파일 선택</label>
                             </div>
                         </td>
+                    </tr>
+                    <tr>
+                        <td><label for="k_number">군집수(K)</label></td>
+                        <td><input type="text" class="form-control" id="k_number" name="k_number"></td>                       </td>
                     </tr>
                     <tr>
                         <td colspan="2" style="text-align: center;">

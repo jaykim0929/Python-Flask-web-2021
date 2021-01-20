@@ -12,6 +12,7 @@ chromedriver.exe
 gov_data_api_key.txt
 gov_data_api_key2.txt
 seoul_api_key.txt
+model/
 
 
 node_modules/

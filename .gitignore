@@ -14,7 +14,8 @@ gov_data_api_key2.txt
 seoul_api_key.txt
 model/
 clus_pca_data/
-
+mnist_test.csv
+mnist_train.csv
 
 node_modules/
 log/

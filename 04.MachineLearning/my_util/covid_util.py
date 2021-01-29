@@ -121,9 +121,14 @@ def make_corona_raw_df(start_date, end_date):
     cdf_raw['합계'] = cdf_raw.sum(axis=1)
     return cdf_raw, gu_list
 
-def make_corona_df(cdf_raw):
+# 최근 1년치 데이터만 보여주기 위해 수정
+def make_corona_df(cdf_raw, start_month):
     cdfM = cdf_raw.resample('M').sum().astype(int)
-    cdfM.index = ['1월','2월','3월','4월','5월','6월','7월','8월','9월','10월','11월','12월']
+    month_list = []
+    for i in range(12):
+        month = (start_month + i) % 12
+        month_list.append(f'{month if month else 12}월')
+    cdfM.index = month_list
     cdf = cdfM.T
     cdf['누적'] = cdf.sum(axis=1)
 
@@ -144,12 +149,12 @@ def get_new_seoul_data():
     resultCode = soup.find('RESULT').find('CODE').get_text()
     if resultCode == 'INFO-000':
         list_total_count = int(soup.find('list_total_count').get_text())
-        current_app.logger.debug(list_total_count)
     else:
         current_app.logger.info(soup.find('RESULT').find('MESSAGE').get_text())
         return
 
     last_sid = dm.get_seoul_last_sid()
+    current_app.logger.debug(f'서울시 건수 - {list_total_count}, DB 보관 - {last_sid}')
     if list_total_count <= last_sid:
         return
     read_count = list_total_count - last_sid
@@ -180,8 +185,7 @@ def get_new_seoul_data():
     })
     df['연번'] = df['연번'].astype(int)
     df.sort_values('연번', inplace=True)
-    #df['확진일'] = pd.to_datetime('2020.'+df['확진일']).astype(str)
-    df['확진일'] = pd.to_datetime('20'+df['확진일']).astype(str)
+    df['확진일'] = pd.to_datetime(df['확진일'].astype(str)).astype(str)
     df['지역'].fillna('기타', inplace=True)
     df['지역'] = df['지역'].map(lambda s: s.strip())
     df.fillna(' ', inplace=True)

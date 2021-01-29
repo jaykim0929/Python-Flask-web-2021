@@ -84,7 +84,7 @@ def mnist():
     else:
         index = int(request.form['index'] or '0')
         index_list = list(range(index, index+3))
-        df = pd.read_csv('static/data/mnist/mnist_test.csv')
+        df = pd.read_csv('static/data/mnist_test.csv')
 
         scaler = joblib.load('static/model/mnist_scaler.pkl')
         test_data = df.iloc[index:index+3, :-1].values
@@ -148,7 +148,7 @@ def news():
         return render_template('advanced/news.html', menu=menu, weather=get_weather())
     else:
         index = int(request.form['index'] or '0')
-        df = pd.read_csv('static/data/news/test.csv')
+        df = pd.read_csv('static/data/test.csv')
         label = f'{df.target[index]} ({target_names[df.target[index]]})'
         test_data = []
         test_data.append(df.data[index])

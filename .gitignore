@@ -18,6 +18,7 @@ mnist_test.csv
 mnist_train.csv
 exersise.ipynb
 news_model.ipynb
+IMDB_model.ipynb
 
 node_modules/
 log/

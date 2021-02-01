@@ -19,6 +19,7 @@ mnist_train.csv
 exersise.ipynb
 news_model.ipynb
 IMDB_model.ipynb
+naver/
 
 node_modules/
 log/

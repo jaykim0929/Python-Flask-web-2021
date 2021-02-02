@@ -129,8 +129,8 @@
                             <a class="dropdown-item" href="/advanced/digits">MNIST(Toy) 손글씨</a>
                             <a class="dropdown-item" href="/advanced/mnist">MNIST 손글씨</a>
                             <div class="dropdown-divider"></div>
-                            <a class="dropdown-item" href="/advanced/imdb">IMDB 영화평</a>
-                            <a class="dropdown-item" href="/advanced/naver">네이버 영화리뷰</a>
+                            <a class="dropdown-item" href="/advanced/imdb">IMDB 리뷰</a>
+                            <a class="dropdown-item" href="/advanced/naver">네이버 영화평</a>
                             <div class="dropdown-divider"></div>
                             <a class="dropdown-item" href="/advanced/news">20 뉴스그룹</a>
                         </div>
@@ -140,7 +140,8 @@
                         <a class="nav-link dropdown-toggle {% if menu.re %}active{% endif %}" 
                            data-toggle="dropdown" href="#">회귀</a>
                         <div class="dropdown-menu">
-                            <a class="dropdown-item" href="/regression/diabetes">당뇨병 BMI</a>
+                            <a class="dropdown-item" href="/regression/diabetes">당뇨병</a>
+                            <div class="dropdown-divider"></div>
                             <a class="dropdown-item" href="/regression/iris">아이리스 피처</a>
                             <a class="dropdown-item" href="/regression/boston">보스톤 집값</a>
                             <div class="dropdown-divider"></div>
@@ -151,6 +152,17 @@
                     <li class="nav-item">
                         <a class="nav-link {% if menu.cu %}active{% endif %}" 
                            href="{% if menu.cu %}#{% else %}/cluster/cluster{% endif %}">군집화/PCA</a>
+                    </li>
+                    <div class="dropdown-divider"></div>
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle {% if menu.nl %}active{% endif %}" 
+                           data-toggle="dropdown" href="#">자연어</a>
+                        <div class="dropdown-menu">
+                            <a class="dropdown-item" href="/nat_lang/translate">번역기</a>
+                            <a class="dropdown-item" href="/nat_lang/tts">텍스트 읽기</a>
+                            <div class="dropdown-divider"></div>
+                            <a class="dropdown-item" href="/nat_lang/emotion">외국어 감성분석</a>
+                        </div>
                     </li>
                     <div class="dropdown-divider"></div>
                 </ul>
@@ -166,10 +178,11 @@
 
     <nav class="navbar navbar-expand-lg navbar-light bg-light justify-content-center fixed-bottom">
         <span class="navbar-text">
-            Copyright &copy; 2020-2021 Jay Kim
+            Copyright &copy; 2020-2021 JayKim
         </span>
     </nav>
     {% block additional_body %}
     {% endblock %}
 </body>
 </html>
+© 2021 GitHub, Inc.

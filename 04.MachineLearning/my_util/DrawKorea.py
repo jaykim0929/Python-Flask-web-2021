@@ -30,7 +30,7 @@ BORDER_LINES = [
     [(27,5), (27,6), (25,6)],
 ]
 
-def DrawKorea(targetData, blockedMap, cmapname, filename):
+def drawKorea(targetData, blockedMap, cmapname, filename):
     whitelabelmin = (max(blockedMap[targetData]) - 
                      min(blockedMap[targetData]))*0.25 + \
                      min(blockedMap[targetData])

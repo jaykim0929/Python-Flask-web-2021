@@ -89,7 +89,7 @@ def mnist():
     else:
         index = int(request.form['index'] or '0')
         index_list = list(range(index, index+3))
-        df = pd.read_csv('static/data/mnist/mnist_test.csv')
+        df = pd.read_csv('static/data/mnist_test.csv')
 
         scaler = joblib.load('static/model/mnist_scaler.pkl')
         test_data = df.iloc[index:index+3, :-1].values

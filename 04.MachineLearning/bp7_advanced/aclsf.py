@@ -4,7 +4,12 @@ from fbprophet import Prophet
 from datetime import datetime, timedelta
 from sklearn.datasets import load_digits
 from konlpy.tag import Okt
+from tensorflow.keras.applcations.vgg16 import vgg16, decode_predictions
+from tensorfrow.keras.applcations.resnet50 import ResNet50, decode_predictions
+from PIL import image
+import cv2
 import os, re, joblib
+import numpy as np
 import pandas as pd
 import matplotlib.pyplot as plt
 from my_util.weather import get_weather
@@ -201,3 +206,27 @@ def news():
         
         return render_template('advanced/news_res.html', menu=menu, news=df.data[index],
                                 res=result_dict, weather=get_weather())
+
+
+
+@aclsf_bp.route('/image', methods=['GET', 'POST'])
+def naver():
+    if request.method == 'GET':
+        return render_template('advanced/image.html', menu=menu, weather=get_weather())
+    else:
+        f_img = request.files['image']
+        file_img = os.path.join(current_app.root_path, 'static/upload/') + f_img.filename
+        f_img.save(file_img)
+        current_app.logger.debug(f"{f_img.filename}, {file_img}")
+
+        img = np.array(Image.open(file_img).resize((224, 224)))
+        '''img = cv2.imread(file_img, -1)
+        img = cv2.cvtColor(img, cv2.COLOR_BGR2RGB)
+        img = cv2.resize(img, (224, 224)) '''
+        yhat = resnet.predict(img.reshape(-1, 224, 224, 3))
+        label = decode_predictions(yhat)
+        label = label[0][0]
+        mtime = int(os.stat(file_img).st_mtime)
+        return render_template('advanced/image_res.html', menu=menu, weather=get_weather(),
+                                name = label[1], prob=np.round(label[2]*100,2),
+                                filename=f_img.filename, mtime=mtime)
